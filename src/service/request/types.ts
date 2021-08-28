@@ -1,0 +1,14 @@
+import type { AxiosRequestConfig, AxiosResponse } from 'axios'
+
+export declare interface J_RequestInterceptors {
+  requestInterceptors?: (config: AxiosRequestConfig) => AxiosRequestConfig
+  requestInterceptorsCatch?: (error: any) => any
+  responseInterceptors?: (config: AxiosResponse) => AxiosResponse
+  responseInterceptorsCatch?: (error: any) => any
+}
+
+// 继承来自AxiosRequestConfig所有属性
+export declare interface J_RequestConfig extends AxiosRequestConfig {
+  // 添加型属性
+  interceptors?: J_RequestInterceptors
+}
