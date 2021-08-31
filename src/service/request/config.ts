@@ -5,13 +5,13 @@ const timeout = 10000
 
 switch (process.env.NODE_ENV) {
   case 'development':
-    baseURL = 'http://123.207.32.32:8000/'
+    baseURL = '/api'
     break
   case 'production':
-    baseURL = 'http://123.207.32.32:8000/'
+    baseURL = 'http://152.136.185.210:5000'
     break
   case 'test':
-    baseURL = 'http://123.207.32.32:8000/'
+    baseURL = 'http://152.136.185.210:5000'
     break
 }
 

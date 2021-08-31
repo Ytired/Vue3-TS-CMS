@@ -8,7 +8,11 @@ import {
   ElAutocomplete,
   ElAvatar,
   ElBacktop,
-  ElBadge
+  ElBadge,
+  ElForm,
+  ElInput,
+  ElFormItem,
+  ElCheckbox
 } from 'element-plus'
 
 const components = [
@@ -19,7 +23,11 @@ const components = [
   ElAutocomplete,
   ElAvatar,
   ElBacktop,
-  ElBadge
+  ElBadge,
+  ElForm,
+  ElInput,
+  ElFormItem,
+  ElCheckbox
 ]
 
 export default function (app: App): void {

@@ -1,28 +1,48 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "types": ["webpack-env"],
-    "paths": {
-      "@/*": ["src/*"]
-    },
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
-  },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
-  ],
-  "exclude": ["node_modules"]
+	"compilerOptions": {
+		// 转换后的代码
+		"target": "esnext",
+		// 转换后的模块化方案
+		"module": "esnext",
+		// 严格检查
+		"strict": true,
+		// 对jsx的处理
+		"jsx": "preserve",
+		// 导入提示
+		"importHelpers": true,
+		// 用node的模式去解析查找模块
+		"moduleResolution": "node",
+		// 跳过对一些库的类型检测
+		"skipLibCheck": true,
+		// 导出引入模块化方式esmodel
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		// 生成映射文件
+		"sourceMap": true,
+		"baseUrl": ".",
+		"types": [
+			"webpack-env"
+		],
+		"paths": {
+			"@/*": [
+				"src/*"
+			]
+		},
+		"lib": [
+			"esnext",
+			"dom",
+			"dom.iterable",
+			"scripthost"
+		]
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"src/**/*.vue",
+		"tests/**/*.ts",
+		"tests/**/*.tsx"
+	],
+	"exclude": [
+		"node_modules"
+	]
 }
