@@ -81,7 +81,6 @@ export default defineComponent({
           }
           // 登陆验证
           store.dispatch('login/accountLoginAction', { ...account })
-          console.log({ ...account })
         }
       })
     }

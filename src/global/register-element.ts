@@ -12,7 +12,22 @@ import {
   ElForm,
   ElInput,
   ElFormItem,
-  ElCheckbox
+  ElCheckbox,
+  ElContainer,
+  ElHeader,
+  ElMain,
+  ElMenu,
+  ElSubmenu,
+  ElMenuItemGroup,
+  ElMenuItem,
+  ElDropdownMenu,
+  ElDropdownItem,
+  ElDropdown,
+  ElCol,
+  ElRow,
+  ElSelect,
+  ElOption,
+  ElDatePicker
 } from 'element-plus'
 
 const components = [
@@ -27,7 +42,22 @@ const components = [
   ElForm,
   ElInput,
   ElFormItem,
-  ElCheckbox
+  ElCheckbox,
+  ElContainer,
+  ElHeader,
+  ElMain,
+  ElMenu,
+  ElSubmenu,
+  ElMenuItemGroup,
+  ElMenuItem,
+  ElDropdownMenu,
+  ElDropdownItem,
+  ElDropdown,
+  ElCol,
+  ElRow,
+  ElSelect,
+  ElOption,
+  ElDatePicker
 ]
 
 export default function (app: App): void {

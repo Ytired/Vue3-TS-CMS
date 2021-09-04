@@ -3,12 +3,12 @@ import type { IAccount, IDataType, ILoginResult } from './types'
 
 enum LoginAPI {
   AccountLogin = '/login',
-  LoginUserInfo = '/users/'
+  LoginUserInfo = '/users/',
+  UserMenus = '/role/'
 }
 
 // 用户登录请求
 export function accountLoginRequest(account: IAccount) {
-  console.log('111', account)
   return j_Request.post<IDataType<ILoginResult>>({
     url: LoginAPI.AccountLogin,
     data: account
@@ -18,6 +18,15 @@ export function accountLoginRequest(account: IAccount) {
 // 请求用户信息
 export function requestUserInfoById(id: number) {
   return j_Request.get<IDataType>({
-    url: LoginAPI.LoginUserInfo + id
+    url: LoginAPI.LoginUserInfo + id,
+    showLoading: false
+  })
+}
+
+// 请求用户菜单信息
+export function requestUserMenusByRoleId(id: number) {
+  return j_Request.get<IDataType>({
+    url: LoginAPI.UserMenus + id + '/menu',
+    showLoading: false
   })
 }
