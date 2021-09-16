@@ -1,24 +1,31 @@
 <template>
   <div class="user">
-    <div class="search">
-      <YjForm v-bind="formConfig" />
-    </div>
-    <div class="content"></div>
+    <page-search :formConfig="searchCormConfig" />
+    <page-content
+      :contentTableConfig="contentTableConfig"
+      pageName="user"
+    ></page-content>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import YjForm from '@/base-ui/form/index'
+
+import PageContent from '@/components/page-content'
+import PageSearch from '@/components/page-search'
 import { searchCormConfig } from './config/search.config'
+import { contentTableConfig } from './config/content.config'
 
 export default defineComponent({
   components: {
-    YjForm
+    PageSearch,
+    PageContent
   },
   setup() {
-    const formConfig = searchCormConfig
-    return { formConfig }
+    return {
+      searchCormConfig,
+      contentTableConfig
+    }
   }
 })
 </script>
@@ -26,5 +33,34 @@ export default defineComponent({
 <style scoped lang="less">
 .user {
   border-radius: 15px;
+  .content {
+    padding: 20px;
+    border-top: 20px solid #f5f5f5;
+  }
+
+  .header {
+    display: flex;
+    height: 45px;
+    padding: 0 5px;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .handler {
+      align-items: center;
+    }
+  }
+
+  .footer {
+    margin-top: 15px;
+
+    .el-pagination {
+      text-align: right;
+    }
+  }
 }
 </style>

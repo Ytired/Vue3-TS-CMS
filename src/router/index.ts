@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 
 import localCache from '@/utils/cache'
+import { firstMenu } from '@/utils/map-menus'
 
 // 路由懒加载
 const login = () =>
@@ -49,6 +50,8 @@ router.beforeEach(to => {
       return '/login'
     }
   }
+
+  if (to.path === '/main') return firstMenu.url
 })
 
 // 导出

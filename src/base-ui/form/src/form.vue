@@ -1,5 +1,8 @@
 <template>
   <div class="yjform">
+    <div class="header">
+      <slot name="header"></slot>
+    </div>
     <el-form :label-width="labelWidwh">
       <el-row>
         <template v-for="item in formItem" :key="item.label">
@@ -16,6 +19,7 @@
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password'"
                   v-bind="item.otherOptions"
+                  v-model="formData[`${item.field}`]"
                 />
               </template>
               <template v-else-if="item.type === 'select'">
@@ -23,6 +27,7 @@
                   style="width: 100%"
                   :placeholder="item.placeholder"
                   v-bind="item.otherOptions"
+                  v-model="formData[`${item.field}`]"
                 >
                   <el-option
                     v-for="option in item.options"
@@ -36,6 +41,7 @@
                 <el-date-picker
                   v-bind="item.otherOptions"
                   style="width: 100%"
+                  v-model="formData[`${item.field}`]"
                 ></el-date-picker>
               </template>
             </el-form-item>
@@ -43,15 +49,22 @@
         </template>
       </el-row>
     </el-form>
+    <div class="footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, onMounted } from 'vue'
+import { defineComponent, PropType, watch, computed, ref } from 'vue'
 import { IFormItem } from '../types/index'
 
 export default defineComponent({
   props: {
+    modelValue: {
+      type: Object,
+      required: true
+    },
     formItem: {
       type: Array as PropType<IFormItem[]>,
       default: () => []
@@ -75,11 +88,23 @@ export default defineComponent({
       })
     }
   },
-  setup(props) {
-    onMounted(() => {
-      console.log('iiii', props)
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
+    // 从props里面去出值赋值到新对象
+    const formData = ref({ ...props.modelValue })
+    // 监听值的改变
+    watch(
+      () => props.modelValue,
+      newValue => {
+        formData.value = { ...props.modelValue }
+        console.log(newValue)
+      }
+    )
+    watch(formData, newValue => emit('update:modelValue', newValue), {
+      deep: true
     })
-    return {}
+
+    return { formData }
   }
 })
 </script>

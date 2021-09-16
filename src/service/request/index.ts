@@ -12,8 +12,11 @@ const DEAFULT_LOADING = true
 class J_Request {
   // 实例变量
   public instance: AxiosInstance
+  // 拦截器
   public interceptors?: J_RequestInterceptors
+  // 显示loading效果
   public showLoading: boolean
+  // loading配置
   public loading?: ILoadingInstance
 
   // 构造器
@@ -23,22 +26,23 @@ class J_Request {
 
     // 保存基本配置
     this.showLoading = config.showLoading ?? DEAFULT_LOADING
+    // 拦截器
     this.interceptors = config.interceptors
 
     // 使用请求拦截器 取出实例化传入的配置
     this.instance.interceptors.request.use(
-      // 可选链操作
+      // 可选链操作 有就取出实例化的请求拦截器
       this.interceptors?.requestInterceptors,
       this.interceptors?.requestInterceptorsCatch
     )
     // 使用响应拦截器 取出实例化传入的配置
     this.instance.interceptors.response.use(
-      // 可选连操作
+      // 可选连操作 有就取出实例化的响应拦截器
       this.interceptors?.responseInterceptors,
       this.interceptors?.responseInterceptorsCatch
     )
 
-    // 添加所有实例都有的拦截器
+    // 先为所有的实例添加请求拦截器
     this.instance.interceptors.request.use(
       config => {
         // 判断是否显示loading
@@ -55,13 +59,14 @@ class J_Request {
         return error
       }
     )
+    // 先为所有的实例添加响应拦截器
     this.instance.interceptors.response.use(
       res => {
         // 将loading移除
         this.loading?.close()
-
+        // 拦截请求并对返回的结果做出处理
         const data = res.data
-
+        // 判断coed码是否为错误的状态码
         if (data.returnCode === '-1001') {
           console.log('请求失败~,错误信息')
         } else {
@@ -80,7 +85,7 @@ class J_Request {
   }
 
   // 请求
-  request<T>(config: J_RequestConfig<T>): Promise<T> {
+  request<T = any>(config: J_RequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       // 单独的请求拦截处理
       if (config.interceptors?.requestInterceptors) {
@@ -115,19 +120,19 @@ class J_Request {
     })
   }
   // get请求
-  get<T>(config: J_RequestConfig<T>): Promise<T> {
+  get<T = any>(config: J_RequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'GET' })
   }
   // post请求
-  post<T>(config: J_RequestConfig<T>): Promise<T> {
+  post<T = any>(config: J_RequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'POST' })
   }
   // patch请求
-  patch<T>(config: J_RequestConfig<T>): Promise<T> {
+  patch<T = any>(config: J_RequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'PATCH' })
   }
   // delete请求
-  delete<T>(config: J_RequestConfig<T>): Promise<T> {
+  delete<T = any>(config: J_RequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'DELETE' })
   }
 }

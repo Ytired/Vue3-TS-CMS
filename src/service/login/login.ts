@@ -1,5 +1,6 @@
 import j_Request from '../index'
-import type { IAccount, IDataType, ILoginResult } from './types'
+import type { IAccount, ILoginResult } from './types'
+import { IDataType } from '../types'
 
 enum LoginAPI {
   AccountLogin = '/login',
