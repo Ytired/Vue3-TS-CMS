@@ -19,7 +19,7 @@
 		"allowSyntheticDefaultImports": true,
 		// 生成映射文件
 		"sourceMap": true,
-		"baseUrl": ".",
+		"baseUrl": "./",
 		"types": [
 			"webpack-env"
 		],

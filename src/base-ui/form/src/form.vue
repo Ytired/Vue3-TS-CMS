@@ -92,7 +92,7 @@ export default defineComponent({
   setup(props, { emit }) {
     // 从props里面去出值赋值到新对象
     const formData = ref({ ...props.modelValue })
-    // 监听值的改变
+    // 监听值的改变 getter 和 setter
     watch(
       () => props.modelValue,
       newValue => {

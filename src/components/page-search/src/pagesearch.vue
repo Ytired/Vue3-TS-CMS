@@ -23,9 +23,10 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import YjForm from '@/base-ui/form'
+import YjForm from '@/base-ui/form/index'
 
 export default defineComponent({
+  emits: ['restBtnClick', 'queryBtnClick'],
   props: {
     formConfig: {
       type: Object,
@@ -35,7 +36,7 @@ export default defineComponent({
   components: {
     YjForm
   },
-  setup(props) {
+  setup(props, { emit }) {
     // 双向绑定的数据应该是由props里卖弄的field属性决定的
     // formData中的属性应该动态来决定
     const formItems = props.formConfig?.formItem ?? []
@@ -48,11 +49,12 @@ export default defineComponent({
     const formData = ref(formOriginData)
     // 监听搜索按钮
     const handleQueryClick = () => {
-      console.log(111)
+      emit('queryBtnClick', formData.value)
     }
 
     // 用户点击按钮重置
     const handleResetClick = () => {
+      emit('restBtnClick')
       for (const key in formOriginData) {
         formData.value[`${key}`] = formOriginData[key]
       }

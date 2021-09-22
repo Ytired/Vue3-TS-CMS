@@ -1,20 +1,26 @@
 <template>
   <div class="user">
-    <page-search :formConfig="searchCormConfig" />
+    <page-search
+      :formConfig="searchCormConfig"
+      @restBtnClick="handleResetClick"
+      @queryBtnClick="handleQueryClick"
+    />
     <page-content
       :contentTableConfig="contentTableConfig"
-      pageName="user"
+      pageName="users"
+      ref="pageContentRef"
     ></page-content>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 import PageContent from '@/components/page-content'
 import PageSearch from '@/components/page-search'
 import { searchCormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
+import { usePageSearch } from '@/hooks/usePageSearch'
 
 export default defineComponent({
   components: {
@@ -22,9 +28,14 @@ export default defineComponent({
     PageContent
   },
   setup() {
+    // 对返回的数组进行结构
+    const [pageContentRef, handleResetClick, handleQueryClick] = usePageSearch()
     return {
       searchCormConfig,
-      contentTableConfig
+      contentTableConfig,
+      pageContentRef,
+      handleResetClick,
+      handleQueryClick
     }
   }
 })
